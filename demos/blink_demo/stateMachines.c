@@ -29,7 +29,7 @@ char toggle_green()	/* only toggle green if red is on!  */
   return changed;
 }
 
-
+/*
 void state_advance()		/* alternate between toggling red & green */
 {
   char changed = 0;  
@@ -43,6 +43,31 @@ void state_advance()		/* alternate between toggling red & green */
   led_changed = changed;
   led_update();
 }
+*/
+void red_toggle_on(){
+  green_on = 1;
+  led_changed = 1;
+  led_update();
+}
+
+void red_toggle_off(){
+  green_on = 0;
+  led_changed = 1;
+  led_update();
+}
+
+void green_toggle_on(){
+  red_on = 1;
+  led_changed = 1;
+  led_update();
+}
+
+void green_toggle_off(){
+  red_on = 0;
+  led_changed = 1;
+  led_update();
+}
+
 
 
 

@@ -30,9 +30,21 @@ char toggle_green()	/* only toggle green if red is on!  */
   return changed;
 }
 
+<<<<<<< HEAD
 void state_advance(){
   if(switch_state_down_1){
     red_toggle_on();
+=======
+/*
+void state_advance()		/* alternate between toggling red & green */
+{
+  char changed = 0;  
+
+  static enum {R=0, G=1} color = G;
+  switch (color) {
+  case R: changed = toggle_red(); color = G; break;
+  case G: changed = toggle_green(); color = R; break;
+>>>>>>> 0bcd9166bfb43d94d36e40daf12dbe1de46f886f
   }
   if(switch_state_down_2){
     green_toggle_on();
@@ -50,6 +62,31 @@ void red_toggle_on(){
   led_changed = 1;
   led_update();
 }
+*/
+void red_toggle_on(){
+  green_on = 1;
+  led_changed = 1;
+  led_update();
+}
+
+void red_toggle_off(){
+  green_on = 0;
+  led_changed = 1;
+  led_update();
+}
+
+void green_toggle_on(){
+  red_on = 1;
+  led_changed = 1;
+  led_update();
+}
+
+void green_toggle_off(){
+  red_on = 0;
+  led_changed = 1;
+  led_update();
+}
+
 
 void red_toggle_off(){
   green_on = 0;

@@ -1,6 +1,7 @@
 #include <msp430.h>
 #include "stateMachines.h"
 #include "led.h"
+#include "switches.h"
 
 char toggle_red()		/* always toggle! */
 {
@@ -28,22 +29,26 @@ char toggle_green()	/* only toggle green if red is on!  */
   }
   return changed;
 }
- /*
 
-void state_advance()		 /*alternate between toggling red & green 
-{
-  char changed = 0;  
+char interruptTime;
 
-  static enum {R=0, G=1} color = G;
-  switch (color) {
-  case R: changed = toggle_red(); color = G; break;
-  case G: changed = toggle_green(); color = R; break;
+void state_advance(){
+  if(switch_state_down_1){
+    interruptTime = 0;
+    red_toggle_on();
   }
-
-  led_changed = changed;
-  led_update();
+  if(switch_state_down_2){
+    interruptTime = 0;
+    green_toggle_on();
+  }
+  if(switch_state_down_3){
+    
+    red_toggle_off();
+  }
+  if(switch_state_down_4){
+    green_toggle_off();
+  }
 }
-*/
 
 void red_toggle_on(){
   green_on = 1;
@@ -68,3 +73,4 @@ void green_toggle_off(){
   led_changed = 1;
   led_update();
 }
+

@@ -8,7 +8,7 @@ LDFLAGS		= -L/opt/ti/msp430_gcc/include
 CC              = msp430-elf-gcc
 AS              = msp430-elf-as
 
-all: blink.elf 
+all: run.elf 
 
 
 #Button
@@ -16,9 +16,16 @@ blink.elf: ${COMMON_OBJECTS} p1_interrupt_handler.o switches.o blinkMain.o state
 
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
+run.elf: ${COMMON_OBJECTS} p1_interrupt_handler.o blinkMain.o switches.o stateMachines.o led.o wdInterruptHandler.o ../lib/libTimer.a
+
+	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
+
+
 load: blink.elf
 	msp430loader.sh blink.elf
 
+load2: run.elf
+	msp430loader.sh run.elf
 clean:
 	rm -f *.o *.elf
 

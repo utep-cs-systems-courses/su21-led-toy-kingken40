@@ -2,6 +2,7 @@
 #include "stateMachines.h"
 #include "led.h"
 #include "switches.h"
+#include "buzzer.h"
 
 char toggle_red()		/* always toggle! */
 {
@@ -37,11 +38,13 @@ void state_advance(){
     interruptTime = 0;
     red_toggle_on();
     green_toggle_on();
+    buzzer_set_period(3462); // Buzz a note when pressed
   }
   else if(switch_state_down_2){ // Half dim
     interruptTime = 2;
     red_toggle_on();
     green_toggle_on();
+    buzzer_set_period(1234);
   }
   else if(switch_state_down_3){ // Full dim
     interruptTime = 0;
@@ -49,10 +52,12 @@ void state_advance(){
     green_toggle_on();
     green_toggle_off();
     red_toggle_off();
+    buzzer_set_period(3182);
   }
   else if(switch_state_down_4){ // turn off both LEDs
     red_toggle_off();
     green_toggle_off();
+    buzzer_set_period(0);
   }
 }
 

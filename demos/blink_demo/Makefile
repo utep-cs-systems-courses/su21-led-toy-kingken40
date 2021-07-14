@@ -16,7 +16,7 @@ blink.elf: ${COMMON_OBJECTS} p1_interrupt_handler.o switches.o blinkMain.o state
 
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
-run.elf: ${COMMON_OBJECTS} p1_interrupt_handler.o blinkMain.o switches.o stateMachines.o led.o wdInterruptHandler.o ../lib/libTimer.a
+run.elf: ${COMMON_OBJECTS} p1_interrupt_handler.o buzzer.o blinkMain.o switches.o stateMachines.o led.o wdInterruptHandler.o ../lib/libTimer.a
 
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
@@ -32,6 +32,8 @@ clean:
 switches.o: switches.h
 
 led.o: led.c led.h
+
+buzzer.o: buzzer.h
 
 wdInterruptHandler.o: stateMachines.h
 

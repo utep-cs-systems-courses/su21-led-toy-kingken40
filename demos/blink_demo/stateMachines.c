@@ -33,20 +33,25 @@ char toggle_green()	/* only toggle green if red is on!  */
 char interruptTime;
 
 void state_advance(){
-  if(switch_state_down_1){
+  if(switch_state_down_1){ // turn on both LEDs
     interruptTime = 0;
     red_toggle_on();
+    green_toggle_on();
   }
-  else if(switch_state_down_2){
+  else if(switch_state_down_2){ // Half dim
     interruptTime = 2;
     red_toggle_on();
+    green_toggle_on();
   }
-  else if(switch_state_down_3){
+  else if(switch_state_down_3){ // Full dim
     interruptTime = 0;
     red_toggle_on();
+    green_toggle_on();
+    green_toggle_off();
     red_toggle_off();
   }
-  else if(switch_state_down_4){
+  else if(switch_state_down_4){ // turn off both LEDs
+    red_toggle_off();
     green_toggle_off();
   }
 }
